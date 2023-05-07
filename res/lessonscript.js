@@ -19,11 +19,11 @@ function updateContent() {
     {
         document.getElementById("showtranslation").style.display = "";
         document.getElementById("audioControl").style.display = ""
-        document.getElementById("audioControl").src = "/lesson1/" + prompts[currentPage][1];
-    document.getElementById("englishText").innerText = prompts[currentPage][2];
-    document.getElementById("spanishText").innerText = prompts[currentPage][3];
-    document.getElementById("spanishText").style.visibility = "hidden";
-      document.getElementById("audioControl").play();
+        document.getElementById("audioControl").src = "/lessonmedia/" + prompts[currentPage][1];
+        document.getElementById("englishText").innerText = prompts[currentPage][2];
+        document.getElementById("spanishText").innerText = prompts[currentPage][3];
+        document.getElementById("spanishText").style.visibility = "hidden";
+        document.getElementById("audioControl").play();
 
 
 
@@ -53,20 +53,13 @@ nextBtn.addEventListener('click', () => {
     updateContent();
 });
 
-// doneBtn.addEventListener('click', () => {
-//     window.location.href = '/';
-// });
-
-// cancelBtn.addEventListener('click', () => {
-//     window.location.href = '/';
-// });
 
 updateContent();
 
 function preloadAudio() {
   prompts.forEach(prompt => {
       if (prompt[0] == 1){
-    let audio = new Audio("/lesson1/" + prompt[1]);
+    let audio = new Audio("/lessonmedia/" + prompt[1]);
     audio.preload = "auto";
     prompt.push(audio);}
   });
