@@ -1,0 +1,162 @@
+body {
+  margin: 0;
+  background-color: black;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: linear-gradient(180deg, #4b0082, black);
+}
+
+.language-selector select {
+  background-color: #4b0082;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 5px;
+  appearance: none;
+  cursor: pointer;
+}
+
+.logout a {
+  text-decoration: none;
+  color: white;
+  background-color: #4b0082;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.logout a:hover {
+  background-color: #6a2c91;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+main {
+  padding: 20px;
+}
+
+.lesson-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.lesson-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.lesson-list a {
+  text-decoration: none;
+  color: white;
+  background-color: #4b0082;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.lesson-list a:hover {
+  background-color: #6a2c91;
+}
+
+.status {
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.to-do {
+  background-color: #e67e22;
+}
+
+.completed {
+  background-color: #27ae60;
+}
+
+.lesson-content {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+a {
+  color: rgb(51, 125, 255);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-number {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.content-pane {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+.vertical-stack {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.default-btn {
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px;
+}
+
+#spanishText {
+  visibility: hidden;
+}
+
+.lesson-content.container {
+  margin: 0 auto;
+  text-align: center;
+  height = 100%;
+}
+
+#englishText, #spanishText {
+  font-size: 40px;
+}
+
+@media screen and (max-width: 600px) {
+  #englishText, #spanishText {
+    font-size: 20px;
+  }
+}

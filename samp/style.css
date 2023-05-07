@@ -1,0 +1,67 @@
+/* General Dark Mode Styles */
+body {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+/* Image Classes */
+img.option {
+  border: none;
+}
+
+img.incorrect {
+  border: 2px solid red;
+}
+
+img.correct {
+  border: 2px solid green;
+}
+
+/* Additional styles to enhance the dark mode experience */
+a, a:visited {
+  color: #bb86fc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+/* Paragraphs */
+p {
+  color: #e0e0e0;
+}
+
+/* Lists */
+ul, ol {
+  color: #e0e0e0;
+}
+
+li {
+  color: #e0e0e0;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  color: #e0e0e0;
+}
+
+th, td {
+  border: 1px solid #424242;
+  padding: 8px;
+}
+
+th {
+  background-color: #303030;
+  color: #ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #181818;
+}

@@ -1,0 +1,11 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore environment files
+.env
+
+# Ignore Flask instance folder
+instance/
+

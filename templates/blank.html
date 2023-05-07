@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/res/styles.css">
+  <title>ESL Quick Reads - Message</title>
+</head>
+<body>
+  <header>
+    <div class="language-selector">
+      <select id="language-selector">
+        <option value="en">English</option>
+      </select>
+    </div>
+    <h1>ESL Quick Reads</h1>
+  </header>
+  <main>
+    <button class="return-home" onclick="location.href='/home';">Home</button>
+    <div class="lesson-content">
+
+	{{message | safe}}
+
+    </div>
+  </main>
+</body>
+</html>
