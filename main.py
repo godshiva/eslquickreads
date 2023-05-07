@@ -342,6 +342,13 @@ def generate_reset_code():
     return ''.join(random.choice("ABCDEF234567Y9TX") for _ in range(13))
 
 def send_email(email_address, reset_code):
+
+    my_api_key = None
+    with open('/home/algorithmguy/mysite/configdata/apikey.txt', 'r') as f:
+        my_api_key = f.read().strip()
+    assert my_api_key is not None and len(my_api_key) > 0, "Failed to load api_key!"
+
+
     mail = mt.Mail(
         sender=mt.Address(email="noreply@eslquickreads.com", name="Test"),
         to=[mt.Address(email=email_address)],
@@ -356,7 +363,7 @@ If you did not request a password reset, you can ignore this email.
 Thank you.
 """,
     )
-    client = mt.MailtrapClient(token="22f16cbcb10f5ed48dafebdf4768808f")
+    client = mt.MailtrapClient(token=my_api_key)
     client.send(mail)
 
 @app.route('/forgotpassword/', methods=['GET', 'POST'])
