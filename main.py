@@ -1,3 +1,4 @@
+from flask import Blueprint
 from flask import Flask, render_template, redirect, url_for, flash, request, session, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -10,25 +11,27 @@ import hashlib
 import secrets
 import mailtrap as mt
 import random
+# from routes import *  # figure out how to split into pieces
 
 app = Flask(__name__)
 
 # detect config file
 
 config_file = "debug.json"
-if os.path.exists("mysite/configdata/prod.json"):
-    config_file = "prod.json"
+prod_file_name = "/home/algorithmguy/mysite/configdata/prod.json"
+if os.path.exists(prod_file_name):
+    config_file = prod_file_name
 
 # detect prod
 
 working_dir = os.getcwd()
-is_prod = (working_dir == "/home/algorithmguy")
+is_prod = ("/home/algorithmguy" in working_dir)
 
 # make sure debug vs prod aligns
 
-assert ("prod.json" in config_file) == is_prod, "prod.json should not be available on non prod, and should not be missing on prod."
+assert ("prod.json" in config_file) == is_prod, f"prod.json should not be available on non prod, and should not be missing on prod. {is_prod} {working_dir} {config_file}"
 
-with open(f"mysite/configdata/{config_file}", "r") as f:
+with open(config_file, "r") as f:
     config = json.load(f)
 
 for key, value in config.items():
