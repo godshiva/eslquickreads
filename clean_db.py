@@ -1,4 +1,5 @@
 import mysql.connector
+import subprocess
 
 if __name__ == "__main__":
 
@@ -23,4 +24,9 @@ if __name__ == "__main__":
     conn.commit()
     conn.close()
 
-    print("Done with task!")
+    print("Done with cleaning task!")
+
+    subprocess.call(['./backup_db.sh'])
+
+
+    print("Done with backup!")
