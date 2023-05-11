@@ -113,7 +113,7 @@ def lesson_number(num):
 def login_page():
     messages = ""
     if G.is_logged_in():
-        return redirect(url_for('main_page'))
+        return redirect(url_for('split_blueprint.main_page'))
     else:
         if request.method == 'POST':
 

@@ -26,7 +26,7 @@ class G:
 
         # detect config file
 
-        config_file = "debug.json"
+        config_file = "configdata/debug.json"
         prod_file_name = "/home/algorithmguy/mysite/configdata/prod.json"
         if os.path.exists(prod_file_name):
             config_file = prod_file_name

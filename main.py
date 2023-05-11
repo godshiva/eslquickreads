@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, send_from_directory
 from flask import Flask, render_template, redirect, url_for, flash, request, session, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
@@ -219,9 +219,25 @@ def register():
     else:
         return render_template('register.html', form=form, messages=my_messages)
 
+# static hosting, for local only
+@app.get('/lessonmedia/<path:path>')
+def LOCALONLY_lesson_media_static_route(path):
+    return send_from_directory(
+        directory="lessonmedia/", path=path
+    )
 
+@app.get('/lessonrepo/<path:path>')
+def LOCALONLY_lessonrepo_static_route(path):
+    return send_from_directory(
+        directory="lessonrepo/", path=path
+    )
 
+@app.get('/res/<path:path>')
+def LOCALONLY_res_static_route(path):
 
+    return send_from_directory(
+        directory="res/", path=path
+    )
 
 
 

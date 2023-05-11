@@ -1,6 +1,6 @@
 {
     "SECRET_KEY":  "xCYLyyaQpuYCBCJEqNKXm2JH",
-    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://algorithmguy:GqcDTjA8pdvp2MNMc2q5XWwG@localhost/algorithmguy$default",
+    "SQLALCHEMY_DATABASE_URI": "mysql+pymysql://root:qhdDs6KnKe8baB.7D>1g9meYyZ@127.0.0.1:3306/jason",
     "USER_PEPPER": "qR8n7d2SuxEKtJvt6gxVPMuL",
     "PASS_PEPPER": "UsLvfWQJSpX9Far5MDEtDDGu",
     "IP_PEPPER": "2tNpexKKeTagaX.vaRZsAERG",
