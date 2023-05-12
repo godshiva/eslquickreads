@@ -6,18 +6,18 @@
   <link rel="stylesheet" href="/res/styles.css">
   <title>ESL Quick Reads - Message</title>
 </head>
-<body>
-  <header>
-    <div class="language-selector">
+<body id="body">
+  <header id="header">
+    <div class="language-selector" id="language-selector-div">
       <select id="language-selector">
         <option value="en">English</option>
       </select>
     </div>
-    <h1>ESL Quick Reads</h1>
+    <h1 id="title">ESL Quick Reads</h1>
   </header>
-  <main>
-    <button class="return-home" onclick="location.href='/home';">Home</button>
-    <div class="lesson-content">
+  <main id="main">
+    <button class="return-home" id="return-home-button" onclick="location.href='/home';">Home</button>
+    <div class="lesson-content" id="lesson-content">
 
 	{{message | safe}}
 
