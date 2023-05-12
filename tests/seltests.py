@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 
 st_time = time.time()
 
-
 driver = webdriver.Chrome('./chromedriver.exe')
 
 def gen_profile(element_type, elements):
@@ -36,10 +35,18 @@ my_site = "https://www.eslquickreads.com/"
 # todo: register page
 # todo: make cleanup utility, register with real user
 # todo: watch lesson get marked as done
+# todo: new user shows "to do" instead of "done"
+# todo: new user shows "done" instead of "to do" on lesson completed
 
 # main page
 
 values = profile_page(my_site)
+expected = [['button', 'Login', 'submit', '', None], ['a', 'Sign up', '', '', f'{my_site}register/'], ['a', 'Forgot Password', '', '', f'{my_site}forgotpassword/'], ['input', '', 'email', 'email', None], ['input', '', 'password', 'password', None]]
+assert values == expected, (values, expected)
+
+# Kick back to login page if not logged in
+
+values = profile_page(my_site + "lesson/1")
 expected = [['button', 'Login', 'submit', '', None], ['a', 'Sign up', '', '', f'{my_site}register/'], ['a', 'Forgot Password', '', '', f'{my_site}forgotpassword/'], ['input', '', 'email', 'email', None], ['input', '', 'password', 'password', None]]
 assert values == expected, (values, expected)
 
@@ -72,19 +79,38 @@ WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'bo
 email_input = driver.find_element(By.ID, 'email')
 email_input.send_keys(my_user)
 
-# Find the password input field and fill in the password
 password_input = driver.find_element(By.ID, 'password')
 password_input.send_keys(my_pass)
 
-# Find the login button and click it
 login_button = driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]')
 login_button.click()
 
-# Wait for the new page to load (you can modify the expected condition as needed)
 wait = WebDriverWait(driver, 10)
 wait.until(EC.presence_of_element_located((By.ID, 'logout-link')))
-values = profile_page(my_site + "home")  # todo: make route tolerant of "/home/"
+values = profile_page(my_site + "home")  # todo: make route tolerant of "/home/" (with final slash)
 expected = [['a', 'Logout', '', 'logout-link', f'{my_site}logout'], ['a', 'Lesson 1', '', '', f'{my_site}lesson/1']]
+assert values == expected, (values, expected)
+
+# now that we're logged in, the page should be different
+
+time.sleep(1)  # todo investigate instability when this is removed
+
+values = profile_page(my_site + "lesson/1")
+expected = [['button', '', 'submit', 'showtranslation', None], ['button', 'Cancelar / Home', 'submit', '', None], ['button', '', 'submit', '', None],
+            ['button', 'Siguiente / Next', 'submit', '', None], ['button', '', 'submit', '', None], ['a', 'Logout', '', '', f'{my_site}logout']]
+
+assert values == expected, (values, expected)
+
+# check completed
+
+values = profile_page(my_site + "completed/1")
+expected = [['a', 'Logout', '', 'logout-link', f'{my_site}logout'], ['a', 'Lesson 1', '', '', f'{my_site}lesson/1']]
+assert values == expected, (values, expected)
+
+# logout
+
+values = profile_page(my_site + "logout")
+expected = [['button', 'Login', 'submit', '', None], ['a', 'Sign up', '', '', f'{my_site}register/'], ['a', 'Forgot Password', '', '', f'{my_site}forgotpassword/'], ['input', '', 'email', 'email', None], ['input', '', 'password', 'password', None]]
 assert values == expected, (values, expected)
 
 driver.quit()
