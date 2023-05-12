@@ -6,19 +6,19 @@
   <link rel="stylesheet" href="/res/styles.css">
   <title>ESL Quick Reads</title>
 </head>
-<body>
-  <header>
-    <div class="language-selector">
+<body id="body">
+  <header id="header">
+    <div class="language-selector" id="language-selector-div">
       <select id="language-selector">
         <option value="en">English</option>
       </select>
     </div>
-    <h1>ESL Quick Reads</h1>
-    <div class="logout">
-      <a href="/logout">Logout</a>
+    <h1 id="site-title">ESL Quick Reads</h1>
+    <div class="logout" id="logout-div">
+      <a href="/logout" id="logout-link">Logout</a>
     </div>
   </header>
-  <main>
+  <main id="main-content">
       {{ lessons | safe}}
   </main>
 </body>
