@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Lesson : {{lessons.lesson_name}}</h5>
+            <p>Description : {{lessons.description}}</p>
+          </div>
+          <div class="card-body">
+              <form method="POST">
+                  {{ form.hidden_tag() }}
+                  <div class="row">
+                    <div class="col-md-5 pr-md-1">
+                          <audio controls>
+                            <source src="/static/audios/{{lessons_prompt.file_name}}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                          </audio>
+                    </div>
+                 </div>
+                 <div class="row mt-4">
+                    <div class="col-md-6 pr-md-1">
+                        <h4>{{lessons_prompt.audio_text}}</h4>
+                    </div>
+                     <div class="col-md-6 pr-md-1">
+                        <h4 id="trantext"></h4>
+                    </div>
+
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col-md-5 pr-md-1">
+                        {{ form.language(class="form-control", id="language") }}
+                    </div>
+                    <div class="col-md-2 pr-md-1">
+                        <button class="btn btn-fill btn-primary" id='skt'>Translate</button>
+                    </div>
+                  </div>
+              </form>
+          </div>
+            <div class="card-footer">
+                {% if next_prompt %}
+                    <a href="{{url_for('view_lesson', lesson_hex=lessons.hex, prompt_hex=next_prompt.hex)}}" class="btn btn-fill btn-primary">Next</a>
+                {%else%}
+                   <a href="{{url_for('complete_lesson', lesson_hex=lessons.hex)}}" class="btn btn-fill btn-primary">Complete</a>
+                {%endif%}
+           </div>
+       </div>
+   </div>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+    $('#skt').on('click',function(event){
+            $.ajax({
+                data: {
+                language: $('#language option:selected').val(),
+                text: "{{lessons_prompt.audio_text}}"
+                },
+                type : 'POST',
+                url : '/Translanguage'
+            })
+            .done(function(data){
+                if(data.error){
+                    alert(data.error);
+                }
+                else{
+                    if(data.valid=='True'){
+                        $('#trantext').html(data.text);
+                    }
+                    else{
+                        $('#trantext').html('Invalid data');
+                    }
+                }
+            });
+            event.preventDefault();
+    });
+});
+</script>
+{% endblock %}
