@@ -3,13 +3,31 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+import json
+import os
+import re
 
 
 app = Flask(__name__, instance_relative_config=True)
-app.config['SECRET_KEY'] = 'harish7634ydgwid78r3re48ryf78wrc7e8rcdc'
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/eslquickreads'
+config_file = "configdata/debug.json"
+prod_file_name = "/home/algorithmguy/mysite/configdata/prod.json"
+if os.path.exists(prod_file_name):
+    config_file = prod_file_name
+
+# detect prod
+
+working_dir = os.getcwd()
+is_prod = ("/home/algorithmguy" in working_dir)
+
+assert ("prod.json" in config_file) == is_prod, f"prod.json should not be available on non prod, and should not be missing on prod. {is_prod} {working_dir} {config_file}"
+
+with open(config_file, "r") as f:
+    config = json.load(f)
+
+for key, value in config.items():
+    app.config[key] = value
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
