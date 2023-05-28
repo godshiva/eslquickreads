@@ -8,7 +8,7 @@ import os
 
 app = Flask(__name__, instance_relative_config=True)
 
-config_file = "../configdata/debug.json"
+config_file = "configdata/debug.json"
 prod_file_name = "/home/algorithmguy/mysite/configdata/prod.json"
 if os.path.exists(prod_file_name):
     config_file = prod_file_name
@@ -20,6 +20,8 @@ is_prod = ("/home/algorithmguy" in working_dir)
 
 assert ("prod.json" in config_file) == is_prod, f"prod.json should not be available on non prod, and should not be missing on prod. {is_prod} {working_dir} {config_file}"
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 with open(config_file, "r") as f:
     config = json.load(f)
 
@@ -27,6 +29,7 @@ for key, value in config.items():
     app.config[key] = value
 
 db = SQLAlchemy(app)
+
 
 bcrypt = Bcrypt(app)
 
@@ -49,3 +52,5 @@ from eslquickreads.route import route
 from eslquickreads.errors import errors
 from eslquickreads.lesson import lesson
 from eslquickreads.developer import developer
+
+# db.create_all()  # run once

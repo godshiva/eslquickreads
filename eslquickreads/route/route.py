@@ -49,7 +49,7 @@ def register():
         #user = Developer(email=form.email.data, password=hashed_password, date_created=datetime.now())
         db.session.add(user)
         db.session.commit()
-        flash('thanks for register', 'danger')
+        flash('Thanks for registering!', 'success')
         return redirect(url_for('login'))
 
     return render_template('register.html', form=form, title='Register')
