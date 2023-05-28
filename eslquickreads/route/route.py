@@ -46,6 +46,7 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = Users(email=form.email.data, password=hashed_password, date_created=datetime.now())
+        #user = Developer(email=form.email.data, password=hashed_password, date_created=datetime.now())
         db.session.add(user)
         db.session.commit()
         flash('thanks for register', 'danger')
