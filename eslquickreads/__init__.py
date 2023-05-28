@@ -5,13 +5,10 @@ from flask_login import LoginManager
 from flask_mail import Mail
 import json
 import os
-import re
-
 
 app = Flask(__name__, instance_relative_config=True)
 
-
-config_file = "configdata/debug.json"
+config_file = "../configdata/debug.json"
 prod_file_name = "/home/algorithmguy/mysite/configdata/prod.json"
 if os.path.exists(prod_file_name):
     config_file = prod_file_name
@@ -30,6 +27,7 @@ for key, value in config.items():
     app.config[key] = value
 
 db = SQLAlchemy(app)
+
 bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
