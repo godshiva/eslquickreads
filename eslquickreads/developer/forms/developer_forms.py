@@ -16,4 +16,4 @@ class AddLessonForm(FlaskForm):
     def validate_lesson_name(self, lesson_name):
         dev = Lesson.query.filter_by(lesson_name=lesson_name.data).first()
         if dev:
-            raise ValidationError('Lesson name already exist in our system, please try another one')
+            raise ValidationError('Lesson name already exists in our system, please try another one')

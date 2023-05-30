@@ -26,7 +26,7 @@
           </div>
           <div class="card-footer">
             <div class="button-container">
-              {% set his = LessonsHistory.query.filter_by(user=current_user, lesson=lesson).first()%}
+              {% set his = LessonsHistory.query.filter_by(user=current_user, lesson=lesson, active=1).first()%}
               {% if his %}
               <a href="{{url_for('view_lesson', lesson_hex=lesson.hex, prompt_hex=lesson_prompts[0].hex)}}" class="btn btn-fill btn-success">
                 Completed
