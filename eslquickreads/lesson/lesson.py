@@ -11,7 +11,7 @@ from datetime import datetime
 @app.route("/home", methods=['GET', 'POST'])
 @login_required
 def home():
-    lessons = Lesson.query.all()
+    lessons = Lesson.query.filter_by(active=1).all()
     return render_template('lesson/home.html', title='Home', Developer=Developer, lessons=lessons,
                            LessonsPrompt=LessonsPrompt, LessonsHistory=LessonsHistory)
 
