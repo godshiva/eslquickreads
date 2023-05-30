@@ -29,8 +29,6 @@ def view_lesson(lesson_hex, prompt_hex):
     next_prompt = 0
     for lessons_prompt1 in lessons_prompts:
         if lessons_prompt1.hex == prompt_hex:
-            print(next_no, len(lessons_prompts), 'ppppppppppp')
-
             if (next_no + 1) >= len(lessons_prompts):
                 next_prompt = 0
             else:
