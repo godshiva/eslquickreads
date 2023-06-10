@@ -29,11 +29,11 @@
               {% set his = LessonsHistory.query.filter_by(user=current_user, lesson=lesson).first()%}
               {% if his %}
               <a href="{{url_for('view_lesson', lesson_hex=lesson.hex, prompt_hex=lesson_prompts[0].hex)}}" class="btn btn-fill btn-success">
-                Completed
+                Completado
               </a>
               {%else%}
               <a href="{{url_for('view_lesson', lesson_hex=lesson.hex, prompt_hex=lesson_prompts[0].hex)}}" class="btn btn-fill btn-primary">
-                Start
+                Comenzar
               </a>
               {%endif%}
             </div>

@@ -16,9 +16,9 @@
                 </a>
                 <p class="description">
                   {% if current_user in Developer.query.all()%}
-                    Developer
+                    Administrador
                   {%else%}
-                    User
+                    Usuario
                   {%endif%}
                 </p>
               </div>

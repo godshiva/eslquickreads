@@ -16,12 +16,15 @@
         {% if lessons_prompt.file_name.endswith('.mp3') %}
             <audio controls>
                 <source src="/static/audios/{{lessons_prompt.file_name}}" type="audio/mpeg">
-                Your browser does not support the audio element.
+
+Su navegador no es compatible con el elemento de audio.
+
+
             </audio>
         {% elif lessons_prompt.file_name.endswith('.mp4') %}
             <video controls>
                 <source src="/static/audios/{{lessons_prompt.file_name}}" type="video/mp4">
-                Your browser does not support the video element.
+                Su navegador no soporta el elemento de vídeo.
             </video>
         {% endif %}
     </div>
@@ -35,14 +38,6 @@
                         <h4 id="trantext"></h4>
                     </div>
 
-                  </div>
-                  <div class="row mt-4">
-                    <div class="col-md-5 pr-md-1">
-                        {{ form.language(class="form-control", id="language") }}
-                    </div>
-                    <div class="col-md-2 pr-md-1">
-                        <button class="btn btn-fill btn-primary" id='skt'>Translate</button>
-                    </div>
                   </div>
               </form>
           </div>
@@ -58,32 +53,4 @@
 </div>
 
 
-<script>
-    $(document).ready(function(){
-    $('#skt').on('click',function(event){
-            $.ajax({
-                data: {
-                language: $('#language option:selected').val(),
-                text: "{{lessons_prompt.audio_text}}"
-                },
-                type : 'POST',
-                url : '/Translanguage'
-            })
-            .done(function(data){
-                if(data.error){
-                    alert(data.error);
-                }
-                else{
-                    if(data.valid=='True'){
-                        $('#trantext').html(data.text);
-                    }
-                    else{
-                        $('#trantext').html('Invalid data');
-                    }
-                }
-            });
-            event.preventDefault();
-    });
-});
-</script>
 {% endblock %}

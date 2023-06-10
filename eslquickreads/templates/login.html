@@ -174,9 +174,9 @@
     <div class="page">
       <div class="container">
         <div class="left">
-          <div class="login">Login</div>
+          <div class="login">Acceso</div>
           <div class="eula">
-            By logging in you agree to allow us to store account details necessary for site functionality (no tracking cookies).
+            Al iniciar sesión, aceptas permitirnos almacenar los detalles de tu cuenta necesarios para la funcionalidad del sitio (no hay cookies de seguimiento).
             <div class="d-grid gap-2 mx-auto mt-2 mb-4">
               <a class="button-33" href="{{url_for('register')}}">Register</a>
               <a class="button-33 mt-2" href="{{url_for('send_reset_password')}}">Forgot Password</a>
@@ -210,10 +210,10 @@
             <form  action="" method="POST">
               {{ form.hidden_tag() }}
 
-              <label>Email</label>
+              <label>Correo Electrónico</label>
               {{ form.email(type="email", id="email") }}
 
-              <label>Password</label>
+              <label>Contraseña</label>
               {{ form.password(type="password", id="password") }}
 
               <input type="submit" id="submit" value="Submit">
