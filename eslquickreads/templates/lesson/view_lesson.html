@@ -10,7 +10,7 @@
           </div>
           <div class="card-body">
               <form method="POST">
-                  {{ form.hidden_tag() }}
+
 <div class="row">
     <div class="col-md-5 pr-md-1">
         {% if lessons_prompt.file_name.endswith('.mp3') %}
@@ -36,14 +36,7 @@
                     </div>
 
                   </div>
-                  <div class="row mt-4">
-                    <div class="col-md-5 pr-md-1">
-                        {{ form.language(class="form-control", id="language") }}
-                    </div>
-                    <div class="col-md-2 pr-md-1">
-                        <button class="btn btn-fill btn-primary" id='skt'>Translate</button>
-                    </div>
-                  </div>
+
               </form>
           </div>
             <div class="card-footer">
