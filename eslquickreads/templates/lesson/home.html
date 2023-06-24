@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    {% for lesson in lessons%}
+    {% set lesson_prompts = LessonsPrompt.query.filter_by(lesson=lesson).all() %}
+    <div class="col-md-3">
+        <div class="card card-user">
+          <div class="card-body">
+            <p class="card-text">
+              <div class="author">
+                <div class="block block-one"></div>
+                <div class="block block-two"></div>
+                <div class="block block-three"></div>
+                <div class="block block-four"></div>
+                <p class="description">
+                  {{lesson.lesson_name}}
+                </p>
+                <p class="description">
+                  {{lesson_prompts|length}} Prompts
+                </p>
+              </div>
+            </p>
+            <div class="card-description">
+              {{lesson.description[:160]}}...
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="button-container">
+              {% set his = LessonsHistory.query.filter_by(user=current_user, lesson=lesson).first()%}
+              {% if his %}
+              <a href="{{url_for('view_lesson', lesson_hex=lesson.hex, prompt_hex=lesson_prompts[0].hex)}}" class="btn btn-fill btn-success">
+                Completed
+              </a>
+              {%else%}
+              <a href="{{url_for('view_lesson', lesson_hex=lesson.hex, prompt_hex=lesson_prompts[0].hex)}}" class="btn btn-fill btn-primary">
+                Start
+              </a>
+              {%endif%}
+            </div>
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

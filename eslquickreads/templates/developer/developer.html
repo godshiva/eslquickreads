@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Add Lesson</h5>
+              </div>
+              <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                  {{form.hidden_tag()}}
+                  <div class="row">
+                    <div class="col-md-5 pr-md-1">
+                      <div class="form-group">
+                        <label>Lesson Name</label>
+                        {{form.lesson_name(class="form-control", placeholder="Lesson Name")}}
+                      </div>
+                    </div>
+                    <div class="col-md-5 pr-md-1">
+                      <div class="form-group">
+                        <label>Lesson Description</label>
+                        {{form.description(class="form-control", placeholder="Lesson Description")}}
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="table-responsive ml-3">
+                      <table class="table tablesorter ">
+                        <thead class=" text-primary">
+                          <tr>
+                            <th width="25%">
+                              Audio File
+                            </th>
+                            <th>
+                              Audio Text
+                            </th>
+                            <th width="10%">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                              {{form.audio_file(class="form-control", placeholder="Lesson Name")}}
+                            </td>
+                            <td>
+                              {{form.file_text(class="form-control", placeholder="Lesson Name")}}
+                            </td>
+                            <td>
+                              <button type="submit" class="btn btn-fill btn-primary rounded"><i class="fas fa-plus"></i></button>
+                            </td>
+                        </tr>
+                        {% if session.get('all_prompts')%}
+                        {% for all_prompt in session.get('all_prompts') %}
+                          <tr>
+                            <td>
+                              {{all_prompt[0]}}
+                            </td>
+                            <td>
+                              {{all_prompt[1]}}
+                            </td>
+                            <td>
+                              <a href="{{url_for('remove_prompt', audio_file=all_prompt[0])}}" class="btn mb-0 btn-danger text-white"><i class="fas fa-minus"></i></a>
+                            </td>
+                          </tr>
+                        {%endfor%}
+                        {%endif%}
+
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+              <div class="card-footer">
+                {% if session.get('all_prompts')%}
+                <a href="{{url_for('developer_prompt')}}" class="btn btn-fill btn-primary">Save</a>
+                {%endif%}
+              </div>
+            </div>
+          </div>
+
+</div>
+{% endblock %}

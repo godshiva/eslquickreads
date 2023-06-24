@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card ">
+      <div class="card-header">
+        <h4 class="card-title"> All Users</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table tablesorter " id="">
+            <thead class=" text-primary">
+              <tr>
+                <th>
+                  Lesson Name
+                </th>
+                <th>
+                  Date of Completion
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+              <tr>
+                <td>
+                  {{lesson.lesson.lesson_name}}
+                </td>
+                <td>
+                  {{lesson.date_created}}
+                </td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

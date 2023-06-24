@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-user">
+          <div class="card-body">
+            <p class="card-text">
+              <div class="author">
+                <div class="block block-one"></div>
+                <div class="block block-two"></div>
+                <div class="block block-three"></div>
+                <div class="block block-four"></div>
+                <a href="javascript:void(0)">
+                  <img class="avatar" src="{{url_for('static', filename='img/default.jpg')}}" alt="...">
+                  <h5 class="title">{{current_user.email}}</h5>
+                </a>
+                <p class="description">
+                  {% if current_user in Developer.query.all()%}
+                    Developer
+                  {%else%}
+                    User
+                  {%endif%}
+                </p>
+              </div>
+            </p>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
