@@ -23,6 +23,8 @@
                 <source src="/static/audios/{{lessons_prompt.file_name}}" type="video/mp4">
                 Your browser does not support the video element.
             </video>
+            {% elif lessons_prompt.file_name.endswith('.jpg') or  lessons_prompt.file_name.endswith('.png')%}
+            <img src="/static/audios/{{lessons_prompt.file_name}}" alt="Image description">
         {% endif %}
     </div>
 </div>
