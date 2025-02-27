@@ -10,13 +10,23 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
-        # Check if the email exists directly
-        dev = Developer.query.filter_by(email=email.data).first()
-        user = Users.query.filter_by(email=email.data).first()
+        # Normalize email to lowercase for case-insensitive matching
+        normalized_email = email.data.lower() if email.data else None
+        
+        # Check if the email exists directly (case-insensitive search)
+        # First check normalized against stored values
+        dev = Developer.query.filter_by(email=normalized_email).first()
+        user = Users.query.filter_by(email=normalized_email).first()
+        
+        # If not found, also try original email for legacy data that might have mixed case
+        if not (user or dev) and normalized_email != email.data:
+            dev = Developer.query.filter_by(email=email.data).first()
+            user = Users.query.filter_by(email=email.data).first()
         
         # If we're in the transition period, also check by hashed email
         if not (user or dev):
             from eslquickreads.route.models.user_models import hash_email
+            # hash_email already handles case normalization
             email_hash_value = hash_email(email.data)
             dev = Developer.query.filter_by(email_hash=email_hash_value).first()
             user = Users.query.filter_by(email_hash=email_hash_value).first()

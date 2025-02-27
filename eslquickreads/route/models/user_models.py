@@ -42,11 +42,16 @@ def hash_email(email):
     if not email:
         return None
     
+    # Convert email to lowercase to ensure case-insensitive matching
+    # Emails are by standard case-insensitive, so user@example.com and User@Example.com 
+    # should generate the same hash
+    normalized_email = email.lower()
+    
     # Get the pepper from app config
     email_pepper = app.config.get('USER_PEPPER', '')
     
     # Create a hash using the pepper
-    email_hash = hashlib.sha256((email + email_pepper).encode()).hexdigest()
+    email_hash = hashlib.sha256((normalized_email + email_pepper).encode()).hexdigest()
     
     return email_hash
 

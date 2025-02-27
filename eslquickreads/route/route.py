@@ -10,9 +10,17 @@ from eslquickreads.route.models.user_models import Users, Developer
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # First try to find by email
-        dev = Developer.query.filter_by(email=form.email.data).first()
-        user = Users.query.filter_by(email=form.email.data).first()
+        # Normalize email to lowercase for case-insensitive matching
+        normalized_email = form.email.data.lower() if form.email.data else None
+        
+        # First try to find by normalized email
+        dev = Developer.query.filter_by(email=normalized_email).first()
+        user = Users.query.filter_by(email=normalized_email).first()
+        
+        # If not found with normalized email, try with original email for legacy data
+        if not (dev or user) and normalized_email != form.email.data:
+            dev = Developer.query.filter_by(email=form.email.data).first()
+            user = Users.query.filter_by(email=form.email.data).first()
 
         # If no match by email, we could be in transition to email_hash, so check that too
         # This will become primary method after full migration
@@ -68,9 +76,12 @@ def register():
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         
-        # Create new user with both email and hashed email
+        # Normalize email to lowercase
+        normalized_email = form.email.data.lower() if form.email.data else None
+        
+        # Create new user with normalized email and hashed email
         user = Users(
-            email=form.email.data, 
+            email=normalized_email, 
             password=hashed_password, 
             date_created=datetime.now()
         )

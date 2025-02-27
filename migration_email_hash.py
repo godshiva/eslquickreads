@@ -60,6 +60,12 @@ def populate_email_hash_for_existing_users():
         for user in users:
             try:
                 old_email = user.email
+                
+                # Also normalize email to lowercase while migrating
+                if old_email and old_email.lower() != old_email:
+                    logger.info(f"Normalizing email case for user: {user.id}")
+                    user.email = old_email.lower()
+                
                 success = user.update_email_hash()
                 if success:
                     logger.info(f"Updated hash for user email: {old_email[:3]}...{old_email[-3:]}")
@@ -75,6 +81,12 @@ def populate_email_hash_for_existing_users():
         for dev in devs:
             try:
                 old_email = dev.email
+                
+                # Also normalize email to lowercase while migrating
+                if old_email and old_email.lower() != old_email:
+                    logger.info(f"Normalizing email case for developer: {dev.id}")
+                    dev.email = old_email.lower()
+                
                 success = dev.update_email_hash()
                 if success:
                     logger.info(f"Updated hash for developer email: {old_email[:3]}...{old_email[-3:]}")
