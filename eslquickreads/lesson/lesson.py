@@ -19,12 +19,25 @@ def home():
 @app.route("/view/lesson/<string:lesson_hex>/<string:prompt_hex>", methods=['GET', 'POST'])
 @login_required
 def view_lesson(lesson_hex, prompt_hex):
-    lessons = Lesson.query.filter_by(hex=lesson_hex).first()
-    lessons_prompt = LessonsPrompt.query.filter_by(hex=prompt_hex, lesson=lessons).first()
-    lessons_prompts = LessonsPrompt.query.filter_by(lesson=lessons).all()
-    if not (lessons_prompt and lessons):
-        flash('Unauthorized User', 'danger')
+    # Validate hex parameters to ensure they only contain valid hex characters
+    if not all(c in '0123456789abcdefABCDEF' for c in lesson_hex) or not all(c in '0123456789abcdefABCDEF' for c in prompt_hex):
+        flash('Invalid parameters', 'danger')
         return redirect(url_for('home'))
+        
+    # Get the lesson and verify it exists
+    lessons = Lesson.query.filter_by(hex=lesson_hex, active=1).first()
+    if not lessons:
+        flash('Lesson not found or inactive', 'danger')
+        return redirect(url_for('home'))
+        
+    # Get the specific prompt and verify it belongs to the lesson
+    lessons_prompt = LessonsPrompt.query.filter_by(hex=prompt_hex, lesson=lessons).first()
+    if not lessons_prompt:
+        flash('Prompt not found', 'danger')
+        return redirect(url_for('home'))
+    
+    # Get all prompts for this lesson
+    lessons_prompts = LessonsPrompt.query.filter_by(lesson=lessons).all()
     next_no = 0
     next_prompt = 0
     for lessons_prompt1 in lessons_prompts:
@@ -48,9 +61,15 @@ def view_lesson(lesson_hex, prompt_hex):
 @app.route("/complete/lesson/<string:lesson_hex>", methods=['GET', 'POST'])
 @login_required
 def complete_lesson(lesson_hex):
-    lesson = Lesson.query.filter_by(hex=lesson_hex).first()
+    # Validate hex parameter to ensure it only contains valid hex characters
+    if not all(c in '0123456789abcdefABCDEF' for c in lesson_hex):
+        flash('Invalid parameters', 'danger')
+        return redirect(url_for('home'))
+        
+    # Get the lesson and verify it exists
+    lesson = Lesson.query.filter_by(hex=lesson_hex, active=1).first()
     if not lesson:
-        flash('Unauthorized User', 'danger')
+        flash('Lesson not found or inactive', 'danger')
         return redirect(url_for('home'))
     history = LessonsHistory(lesson=lesson, user=current_user, date_created=datetime.now())
     db.session.add(history)
@@ -65,9 +84,19 @@ def Translanguagea():
     language = request.form.get('language')
     text = request.form.get('text')
     if text and language:
+        # Validate language code to prevent injection
+        valid_languages = list(googletrans.LANGUAGES.keys())
+        if language not in valid_languages:
+            return jsonify({'error': 'invalid language code'})
+            
+        # Sanitize text input (basic sanitization)
+        text = text.replace('<', '&lt;').replace('>', '&gt;')
+        
         translator = Translator()
         result = translator.translate(text, src='en', dest=language)
-        return jsonify({'valid': 'True', 'text': result.text})
+        # HTML escape the result text
+        translated_text = result.text.replace('<', '&lt;').replace('>', '&gt;')
+        return jsonify({'valid': 'True', 'text': translated_text})
 
     return jsonify({'error': 'missing data'})
 

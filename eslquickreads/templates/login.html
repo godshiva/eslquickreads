@@ -222,7 +222,7 @@
                 {% if messages %}
                   {% for category, message in messages %}
                     <p class="mt-2 text-{{ category }}">
-                      {{ message }}
+                      {{ message|e }}
                     </p>
                   {% endfor %}
                 {% endif %}
