@@ -11,7 +11,7 @@ click==8.0.4
 cloudscraper==1.2.71
 cryptography==36.0.2
 decorator==5.1.1
-Django==3.2.19
+Django>=4.2.16
 Flask==2.0.1
 Flask-Bcrypt==0.7.1
 Flask-CKEditor==0.4.6
@@ -29,7 +29,7 @@ h2==3.2.0
 hpack==3.0.0
 hstspreload==2023.1.1
 httpcore==0.9.1
-httpx==0.13.3
+httpx>=0.23.0
 hyperframe==5.2.0
 idna==2.8
 ipython==7.24.1
@@ -44,14 +44,14 @@ oauthlib==3.2.2
 parso==0.8.3
 pexpect==4.8.0
 pickleshare==0.7.5
-Pillow==9.0.0
+Pillow>=10.3.0
 prompt-toolkit==3.0.38
 ptyprocess==0.7.0
 pyasn1==0.4.8
 pyasn1-modules==0.3.0
 pycparser==2.21
 Pygments==2.15.1
-PyMySQL==0.10.1
+PyMySQL>=1.1.1
 pyparsing==3.0.9
 python-dateutil==2.8.2
 python-dotenv==0.20.0
@@ -70,6 +70,6 @@ traitlets==5.9.0
 typing_extensions==4.6.2
 urllib3==1.24.3
 wcwidth==0.2.6
-Werkzeug==2.0.1
+Werkzeug>=3.0.6
 wkhtmltopdf==0.2
 WTForms==2.3.3
