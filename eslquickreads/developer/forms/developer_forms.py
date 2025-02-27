@@ -9,7 +9,7 @@ from flask_wtf.file import FileField, FileAllowed
 class AddLessonForm(FlaskForm):
     lesson_name = StringField("lesson_name", validators=[DataRequired()])
     description = StringField("description", validators=[DataRequired()])
-    audio_file = FileField('audio_file', validators=[FileAllowed(['mp3', 'mp4'])])
+    audio_file = FileField('audio_file', validators=[FileAllowed(['mp3', 'mp4', 'png', 'jpg'])])
     file_text = StringField("file_text", validators=[DataRequired()])
     submit = SubmitField('Submit')
 

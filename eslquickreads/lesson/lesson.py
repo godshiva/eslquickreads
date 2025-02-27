@@ -35,14 +35,14 @@ def view_lesson(lesson_hex, prompt_hex):
                 next_prompt = lessons_prompts[next_no + 1]
         else:
             next_no += 1
-    form = SelectLanguageForm()
-    if form.validate_on_submit():
-        translator = Translator()
-        result = translator.translate(lessons_prompt.audio_text, src='en', dest=form.language.data)
-        session['trans_text'] = result.text
-        return redirect(url_for('view_lesson', lesson_hex=lesson_hex, prompt_hex=prompt_hex))
-    return render_template('lesson/view_lesson.html', title='Home', Developer=Developer, lessons=lessons,
-                           lessons_prompt=lessons_prompt, form=form, next_prompt=next_prompt)
+    # form = SelectLanguageForm()
+    # if form.validate_on_submit():
+    #     translator = Translator()
+    #     result = translator.translate(lessons_prompt.audio_text, src='en', dest=form.language.data)
+    #     session['trans_text'] = result.text
+    #     return redirect(url_for('view_lesson', lesson_hex=lesson_hex, prompt_hex=prompt_hex))
+    return render_template('lesson/view_lesson.html', title='Lesson', Developer=Developer, lessons=lessons,
+                           lessons_prompt=lessons_prompt, next_prompt=next_prompt)
 
 
 @app.route("/complete/lesson/<string:lesson_hex>", methods=['GET', 'POST'])
