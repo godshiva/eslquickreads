@@ -55,16 +55,6 @@
               <p>Add Lessons</p>
             </a>
           </li>
-          {% if title == "Profile"%}
-          <li class="active ">
-          {%else%}
-          <li>
-          {%endif%}
-            <a href="{{url_for('profile')}}">
-              <i class="tim-icons icon-single-02"></i>
-              <p>User Profile</p>
-            </a>
-          </li>
           {% if title == "All Users"%}
           <li class="active ">
           {%else%}
@@ -97,16 +87,6 @@
             <a href="{{url_for('home')}}">
               <i class="tim-icons icon-chart-pie-36"></i>
               <p>Dashboard</p>
-            </a>
-          </li>
-          {% if title == "Profile"%}
-          <li class="active ">
-          {%else%}
-          <li>
-          {%endif%}
-            <a href="{{url_for('profile')}}">
-              <i class="tim-icons icon-single-02"></i>
-              <p>User Profile</p>
             </a>
           </li>
           {% if title == "Lesson History"%}
